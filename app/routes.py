@@ -12,3 +12,11 @@ def home():
         'home.html',
         title=_('Home')
     )
+
+@app.route('/pareto')
+def pareto():
+    """pareto front"""
+    return render_template(
+        'pareto.html',
+        title=_('Pareto Front')
+    )

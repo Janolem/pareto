@@ -13,7 +13,6 @@ import plotly.io as pio
 import pickle
 import json
 import numpy as np
-from .layout import html_layout
 from .problem_description import Problem
 from .plot_functions import plot_selected_watersheds, \
     plot_selected_contourlines, \
@@ -48,16 +47,6 @@ def init_pareto(server):
             id="root",
             children=[
                 html.Div(
-                    id="header",
-                    children=[
-                        html.H4(children="Header"),
-                        html.P(
-                            id="description",
-                            children="The illustrated Pareto Front shows the optimal solutions."
-                        ),
-                    ],
-                ),
-                html.Div(
                     id="app-container",
                     children=[
                         html.Div(
@@ -73,10 +62,6 @@ def init_pareto(server):
                                             "label": "Land use allocation",
                                             "value": "benchmark_2",
                                         },
-                                        # {
-                                        #     "label": "Benchmark 3",
-                                        #     "value": "benchmark_3",
-                                        # },
                                     ],
                                     value="benchmark_1",
                                     id="study_area-dropdown",
@@ -297,10 +282,11 @@ def init_pareto(server):
     dash_app = dash.Dash(
         server=server,
         routes_pathname_prefix='/dashapp/',
-        external_stylesheets=[dbc.themes.DARKLY]
+        external_stylesheets=[
+            "/static/stylesheets/style.css",
+            "https://fonts.googleapis.com/css2?family=Bodoni+Moda&display=swap",
+        ],
     )
-    #app = dash_app.server
-    #dash_app.index_string = html_layout
     #dash_app.title = "Interactive paretofront"
 
     dash_app.layout = create_layout()

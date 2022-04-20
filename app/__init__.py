@@ -13,7 +13,7 @@ def init_app():
 
     bootstrap.init_app(app)
     babel.init_app(app)
-
+    app.static_folder = 'static'
     with app.app_context():
         #Import parts of core flask app
         from . import routes
