@@ -1,2 +1,2 @@
-# pareto App 
-This is a app
+# pareto
+In the making
