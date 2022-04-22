@@ -1,3 +1,3 @@
 # pareto
-In the making
+In the making.  
 current status available here: https://jomthedom.azurewebsites.net/home
