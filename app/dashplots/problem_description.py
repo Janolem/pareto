@@ -2,6 +2,7 @@ class Problem:
     _id = 0
     def __init__(self,
                  name,
+                 description,
                  nr_objectives,
                  benchmarks,
                  objective_names,
@@ -18,6 +19,7 @@ class Problem:
         self.problem_id = Problem._id
         Problem._id += 1
         self.representation = name
+        self.description = description
         self.nr_objectives = nr_objectives
         self.benchmarks = benchmarks
         self.objective_names = objective_names
