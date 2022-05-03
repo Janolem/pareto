@@ -172,7 +172,6 @@ def init_pareto(server):
                     family="Arial",
                     size=14
                 )
-
             )
             figure = go.Figure(layout=layout)
             figure = make_subplots(figure=figure)
