@@ -48,3 +48,21 @@ body .centrictext{
 iframe{
     border: 0px;
 }
+div{
+    text-align: center;
+    position: relative;
+    align-content: center;
+}
+.center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+table, th, td {
+    border: solid 1px;
+    border-collapse: collapse;
+  }
+
+th, td {
+    text-align: left;
+    padding: 15px;
+  }

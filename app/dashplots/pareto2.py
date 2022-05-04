@@ -250,6 +250,7 @@ def init_pareto2(server):
 
     comola_problem = Problem(
         name = "Constrained multi-objective land use allocation",
+        description = "none",
         nr_objectives= 4,
         benchmarks = [optimal_solutions_comola],
         objective_names = ["Maximize Crop Yield", "Maximize Habitat Heterogeneity", "Maximize Forest Species Richness", "Maximize Water Yield"],

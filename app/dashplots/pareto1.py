@@ -274,6 +274,7 @@ def init_pareto1(server):
 
     swc_allocation_problem = Problem(
         name = "Soil and water conservation measure allocation",
+        description = "none",
         nr_objectives= 2,
         benchmarks = [optimal_solutions],
         objective_names = ["Minimization of soil loss", "Minimization of labor requirements"],
