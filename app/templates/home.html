@@ -2,10 +2,12 @@
 
 {% block content %}
     <h1 class=centrictext> Welcome to the interactive exploration of Pareto fronts </h1>
+    <div>
     <p> The goal of this application is to deliver the complex information
         from optimization results with multiple objectives, and especially from optimizations that have a spatial context. </p>
     <p> First, let us define potentially new terms: </p>
-    <table>
+    <br>
+    <table class=center>
       <tr>
         <th><b>Term</b></th>
         <th><b>Definition</b></th>
@@ -25,7 +27,7 @@
              <td><b>Spatial configuration</b></td> <td> Solution represented in its spatial context</td>
             </tr>
     </table>
-
+<br>
 <p>
     Next, we describe an example problem with two conflicting objectives.<br>
     Imagine you get a new job in a new city and you want to commute to work by bike. <br>
@@ -40,4 +42,5 @@
     Now consider more complex problems with more solutions in the Pareto fronts.<br>
     The apps listed on this website describe different problems and provide the opportunity to interactively explore all optimal solutions.
 </p>
+</div>
 {% endblock %}
