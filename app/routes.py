@@ -13,10 +13,26 @@ def home():
         title=_('Home')
     )
 
-@app.route('/pareto')
-def pareto():
-    """pareto front"""
+@app.route('/explore')
+def explore():
+    """Explore page."""
     return render_template(
-        'pareto.html',
-        title=_('Pareto Front')
+        'explore.html',
+        title=_('Explore')
+    )
+
+@app.route('/pareto1')
+def pareto1():
+    """pareto front1"""
+    return render_template(
+        'pareto1.html',
+        title=_('Pareto Front 1')
+    )
+
+@app.route('/pareto2')
+def pareto2():
+    """pareto front2"""
+    return render_template(
+        'pareto2.html',
+        title=_('Pareto Front 2')
     )

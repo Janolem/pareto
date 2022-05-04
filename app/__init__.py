@@ -19,7 +19,9 @@ def init_app():
         from . import routes
         
         #Import dash app
-        from .dashplots.pareto import init_pareto
-        app = init_pareto(app)
+        from .dashplots.pareto1 import init_pareto1
+        from .dashplots.pareto2 import init_pareto2
+        app = init_pareto1(app)
+        app = init_pareto2(app)
 
         return app
