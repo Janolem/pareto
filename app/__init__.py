@@ -3,7 +3,6 @@ from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_babel import Babel
 
-
 def init_app():
     """Construct core flask application"""
     app = Flask(__name__)

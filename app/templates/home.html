@@ -1,10 +1,43 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 class=centrictext>Welcome to Pareto</h1>
-    <p class=centrictext>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci magni, aliquid quasi temporibus deserunt quaerat cupiditate, asperiores accusamus doloremque magnam, exercitationem sit expedita. Eveniet beatae voluptates quisquam blanditiis dicta officiis!
-    Error, voluptate. Numquam voluptatibus rem blanditiis nihil? Excepturi totam modi, voluptate itaque distinctio voluptates minima natus maiores, doloremque rerum eos voluptas dolor sunt asperiores, maxime dolores odit laudantium eum. Soluta.
-    Id ipsam explicabo consectetur voluptatem, soluta iste labore nihil! Iure eum eligendi vel harum sequi! Consequatur quasi nihil et illum incidunt voluptatibus, praesentium odit assumenda accusantium non, nesciunt nemo asperiores!
-    Rem maxime accusamus iure praesentium quisquam a quae molestias, minus delectus, dolore porro aperiam aliquid rerum ipsam dolorem. Quibusdam vitae architecto rem est, nam labore eligendi et corrupti expedita doloribus!
-    Fugiat consequatur esse molestiae maxime reiciendis deserunt nostrum adipisci minus ducimus debitis beatae sequi iure, iusto incidunt cumque, eius aliquid praesentium a accusamus culpa soluta possimus ab libero animi. Ratione.</p>
+    <h1 class=centrictext> Welcome to the interactive exploration of Pareto fronts </h1>
+    <p> The goal of this application is to deliver the complex information
+        from optimization results with multiple objectives, and especially from optimizations that have a spatial context. </p>
+    <p> First, let us define potentially new terms: </p>
+    <table>
+      <tr>
+        <th><b>Term</b></th>
+        <th><b>Definition</b></th>
+      </tr>
+      <tr>
+        <td><b>Optimization</b></td>  <td> Conditions that a solution to an optimization problem must satisfy
+        <tr>
+        <td><b>Objective function</b>   </td>  <td> Function that quantifies the quality of a solution in an objective values for one objective</td>
+        </tr>
+        <tr>
+            <td><b>Constraints</b></td> <td> Conditions that a solution to an optimization problem must satisfy</td>
+         </tr>
+         <tr>
+          <td><b>Pareto-front</b></td> <td> Frontier that contains all optimal solutions for a problem with conflicting objectives</td>
+          </tr>
+            <tr>
+             <td><b>Spatial configuration</b></td> <td> Solution represented in its spatial context</td>
+            </tr>
+    </table>
+
+<p>
+    Next, we describe an example problem with two conflicting objectives.<br>
+    Imagine you get a new job in a new city and you want to commute to work by bike. <br>
+    You get a new bike and don't want to break it, but the bike paths are scattered with pitholes. <br>
+    You got a problem: you want to spend as little commuting time as possible, but you also want to avoid the pitholes. <br>
+    Luckily you are able to formulize the problem, get the data and perform an optimization. How to decide? <br>
+    Let us inspect three different solutions: </p>
+
+<object data="/static/example_pf.svg" type="image/svg+xml" width="1200" height="400"> </object>
+
+<p>
+    Now consider more complex problems with more solutions in the Pareto fronts.<br>
+    The apps listed on this website describe different problems and provide the opportunity to interactively explore all optimal solutions.
+</p>
 {% endblock %}

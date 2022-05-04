@@ -172,7 +172,6 @@ def init_pareto(server):
                     family="Arial",
                     size=14
                 )
-
             )
             figure = go.Figure(layout=layout)
             figure = make_subplots(figure=figure)
@@ -327,6 +326,9 @@ def init_pareto(server):
 
     swc_allocation_problem = Problem(
         name = "Soil and water conservation measure allocation",
+        description = "The problem is a land conservation allocation problem with two conflicting objectives;\
+         minimizing soil erosion and minimizing labor requirements to install soil and water conservation measures. \
+         The principle is to decide which watersheds are conserved through bench terraces and which are not.",
         nr_objectives= 2,
         benchmarks = [optimal_solutions],
         objective_names = ["Minimization of soil loss", "Minimization of labor requirements"],
@@ -353,6 +355,8 @@ def init_pareto(server):
 
     comola_problem = Problem(
         name = "Constrained multi-objective land use allocation",
+        description = "The problem is a constrained multi-objective land use allocation problem with four conflicting objectives. \
+                      The principle is to allocate land uses to cells or patches of common land use. It was introduced by Strauch et al. 2019",
         nr_objectives= 4,
         benchmarks = [optimal_solutions_comola],
         objective_names = ["Maximize Crop Yield", "Maximize Habitat Heterogeneity", "Maximize Forest Species Richness", "Maximize Water Yield"],
