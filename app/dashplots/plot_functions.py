@@ -119,9 +119,7 @@ def plot_selected_landuse_map(clicked_solution):
             landuseraster.append(colvalues)
         reversed_lum = np.flip(np.array(landuseraster), axis=0)
         return reversed_lum
-
-    with open(r"data\patch_map.pkl",
-              'rb') as output:
+    with open(os.path.join("data", "patch_map.pkl"),'rb') as output:
         patch_map = pickle.load(output)
 
     landusemap = read_patch_ID_map(

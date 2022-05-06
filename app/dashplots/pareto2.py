@@ -61,23 +61,13 @@ def init_pareto2(server):
                                     html.Div(
                                     id="pareto_front-container",
                                     children=[
-                                        html.P(
-                                            "Pareto front title",
-                                            id="pareto_front-title",
+                                        dcc.Graph(
+                                            id="pareto_front", style={"display": "inline-block" , "height": "50vh", "width": "80vh"}
                                         ),
                                         dcc.Graph(
-                                            id="pareto_front",
-                                        ),
+                                            id="selected_data", style={"display": "inline-block" , "height": "50vh", "width": "80vh"}
+                                        )
                                     ],
-                                ),
-                            ],
-                        ),
-                        html.Div(
-                            id="map-container",
-                            children=[
-                                dcc.Graph(
-                                    id="selected_data",
-                                    figure= blank_figure()
                                 ),
                             ],
                         ),
@@ -102,34 +92,27 @@ def init_pareto2(server):
                 secondary_y=False,
             )
 
-            figure.update_layout(
-                title={
-                    'y': 0.975,
-                    'x': 0.055,
-                    'xanchor': 'left',
-                    'yanchor': 'top'},
-                legend={'itemsizing': 'constant'})
+            # figure.update_layout(
+            #     title={
+            #         'y': 0.975,
+            #         'x': 0.055,
+            #         'xanchor': 'left',
+            #         'yanchor': 'top'},
+            #     legend={'itemsizing': 'constant'})
 
             return figure
         @dash_app.callback(
             Output("pareto_front", "figure"),
-            [Input("load_interval", "n_intervals"),]
+            Input("load_interval", "n_intervals")
         )
         def display_scatter_plot(n_intervals):
 
             axes = dict(title="", showgrid=True, zeroline=False, showticklabels=False)
             layout = go.Layout(
-                # title={'text': "Pairwise Pareto front of objectives {} and {}".format("Objective 1",
-                #                                                                       "Objective 2"),
-                #        'x': 0.2, },
-                margin=dict(r=0, l=0, t=0, b=0),
-                scene=dict(xaxis=axes, yaxis=axes),
-                width=1500, height=700,
-                autosize=True,
                 xaxis_title=problem.objective_names[0],
                 yaxis_title=problem.objective_names[1],
                 font=dict(
-                    family="Arial",
+                    family="Bodoni Moda",
                     size=14
                 )
 
@@ -196,7 +179,7 @@ def init_pareto2(server):
                 try:
                     if clickData and clicked_solution is not None:
                         layout1 = go.Layout(
-                            title=f'Corresponding solution',
+                            #title=f'Corresponding solution',
                             yaxis=dict(showticklabels=False),
                             xaxis=dict(showticklabels=False)
                         )
@@ -217,7 +200,7 @@ def init_pareto2(server):
                             fig.add_trace(problem.plot_background_trace)
 
                         fig.add_trace(trace)
-                        fig.update_layout(height=700, width=800)
+                        #fig.update_layout(height=700, width=800)
                         return fig
                 #if element is not found directly (mouse slightly off) prevent error message
                 except  KeyError as error:
