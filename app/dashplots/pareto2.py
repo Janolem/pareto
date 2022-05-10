@@ -62,10 +62,10 @@ def init_pareto2(server):
                                     id="pareto_front-container",
                                     children=[
                                         dcc.Graph(
-                                            id="pareto_front", style={"display": "inline-block" , "height": "50vh", "width": "80vh"}
+                                            id="pareto_front", style={"display": "inline-block" , "height": "50vh", "width": "40vh"}
                                         ),
                                         dcc.Graph(
-                                            id="selected_data", style={"display": "inline-block" , "height": "50vh", "width": "80vh"}
+                                            id="selected_data", style={"display": "inline-block" , "height": "50vh", "width": "40vh"}
                                         )
                                     ],
                                 ),
