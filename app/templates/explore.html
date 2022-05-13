@@ -2,6 +2,6 @@
 
 {% block content %}
     <h1 class=centrictext>Explore</h1>
-    <p class=centrictext><a href="{{ url_for('pareto1') }}">Project X</a></p>
-    <p class=centrictext><a href="{{ url_for('pareto2') }}">Project Y</a></p>
+    {% include '_post1.html' %}
+    {% include '_post1.html' %}
 {% endblock %}
