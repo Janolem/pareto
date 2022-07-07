@@ -112,20 +112,20 @@ for v in variations:
 db.session.commit()
 
 
-problems2 = Problem.query.all()
-for p in problems2:
-    db.session.delete(p)
+# problems2 = Problem.query.all()
+# for p in problems2:
+#     db.session.delete(p)
+#
+# variations2 = Variation.query.all()
+# for v in variations2:
+#     db.session.delete(v)
+#
+# constraints2 = Constraint.query.all()
+# for c in constraints2:
+#     db.session.delete(c)
+#
+# objectives2 = Objective.query.all()
+# for o in objectives2:
+#     db.session.delete(o)
 
-variations2 = Variation.query.all()
-for v in variations2:
-    db.session.delete(v)
-
-constraints2 = Constraint.query.all()
-for c in constraints2:
-    db.session.delete(c)
-
-objectives2 = Objective.query.all()
-for o in objectives2:
-    db.session.delete(o)
-
-db.session.commit()
+#db.session.commit()
