@@ -19,6 +19,19 @@ from .plot_functions import plot_selected_watersheds, \
     swc_allocation_create_background_map,\
     swc_allocation_layout, plot_selected_landuse_map
 
+from flask import Flask
+from app import db
+from app.models import Problem, Solution, Variation, Constraint, Objective
+
+def create_app():
+    app = Flask(__name__)
+    db.init_app(app)
+    return app
+
+application = create_app()
+application.app_context().push()
+with application.app_context():
+    db.create_all()
 
 def init_pareto2(server):
 
@@ -231,23 +244,26 @@ def init_pareto2(server):
     for i in range(len(pf_comola[2])):
         optimal_solutions_comola.append(Solution( np.array(pf_comola[2][i].representation),np.array(pf_comola[2][i].fitness).reshape((4,1))))
 
+    p = Problem.query.filter_by(name='CoMOLA').fetchone()
+    objectives = Objective.query.join(Variation.variation_has_objectives).filter(
+        Variation.variation_has_objectives.any(id=Objective.id))
+    constraints = Constraint.query.join(Variation.variation_has_constraints).filter(Variation.variation_has_constraints.any(id=Variation.id))
+    string_mathematical_formulation = ""
+    string_mathematical_formulation = [ string_mathematical_formulation + o.mathematical_formulation for o in objectives] + [  string_mathematical_formulation + c.mathematical_formulation for c in constraints]
+    string_mathematical_formulation = '\n'.join(string_mathematical_formulation)
+
+
     comola_problem = Problem(
-        name = "Constrained multi-objective land use allocation",
-        description = "none",
+        name = p.name,
+        description = p.description,
         nr_objectives= 4,
         benchmarks = [optimal_solutions_comola],
-        objective_names = ["Maximize Crop Yield", "Maximize Habitat Heterogeneity", "Maximize Forest Species Richness", "Maximize Water Yield"],
-        objective_descriptions = [
-            "Crop yield basis on number of allocated land of cropland 1-5, where 1 has the lowest intensity and 5 the highest.",
-            "Habitat Heterogeneity is computed by summing up the edges of neighboring cells with different land uses and assigning them a weight.",
-            "Forest Species richness depends on the total area of forest.",
-            "Each land use gets assigned a specific water yield parameter, and Crop land 1 is the optimal land use for this objective."
-                ],
+        objective_names = [o.name for o in objectives],
+        objective_descriptions = [o.description for o in objectives],
         objective_functions = [None, None],
-        constraint_descriptions = ["Land use transition constraints: Urban can not be transitioned into another land use. Pasture can only be transitioned into Forest, not the other way.",
-                                "Area constraints: Pasture has area constraints of minimum of 10% and maximum of 30% of the total area. Forest has area constraints of minimum of 10% and maximum of 25% of the total area."],
+        constraint_descriptions = [c.description for c in constraints],
         validation_functions = [None],
-        mathematical_formulation = None,
+        mathematical_formulation = string_mathematical_formulation,
         plot_layout = None,
         plot_function_solution = plot_selected_landuse_map,
         plot_background_trace = None,

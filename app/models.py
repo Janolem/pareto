@@ -1,6 +1,7 @@
 from sqlalchemy import PickleType
 from app import db
 
+__table_args__ = {'extend_existing': True}
 
 class Problem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -26,13 +27,14 @@ class Plot_function(db.Model):
 
 variations_have_constraints = db.Table('Variations_have_constraints',
     db.Column('constraint_id', db.Integer, db.ForeignKey('constraint.id'), primary_key=True),
-    db.Column('variation_id', db.Integer, db.ForeignKey('variation.id'), primary_key=True)
+    db.Column('variation_id', db.Integer, db.ForeignKey('variation.id'), primary_key=True),
+    db.Column('symbology', db.String()),
 )
-
 
 variations_have_objectives = db.Table('Variations_have_objectives',
     db.Column('objective_id', db.Integer, db.ForeignKey('objective.id'), primary_key=True),
-    db.Column('variation_id', db.Integer, db.ForeignKey('variation.id'), primary_key=True)
+    db.Column('variation_id', db.Integer, db.ForeignKey('variation.id'), primary_key=True),
+    db.Column('symbology', db.String())
 )
 
 
@@ -51,8 +53,8 @@ class Constraint(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), index=True, unique=True)
     description = db.Column(db.String)
-    function = db.Column(db.String)
     mathematical_formulation = db.Column(db.String)
+    symbols = db.Column(db.String)
 
     def __repr__(self):
         return '<Constraint: {}>'.format(self.name)
@@ -62,8 +64,8 @@ class Objective(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), index=True, unique=True)
     description = db.Column(db.String)
-    function = db.Column(db.String)
     mathematical_formulation = db.Column(db.String)
+    symbols = db.Column(db.String)
 
     def __repr__(self):
         return '<Objective: {}>'.format(self.name)
