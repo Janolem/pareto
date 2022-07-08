@@ -3,10 +3,13 @@
 {% block content %}
     <h1>Project Y</h1>
     <h2>Moritz Hildemann</h2>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sit ratione perspiciatis repellat id, numquam ullam veritatis illo ipsum, iure eum odio! Tenetur, soluta quasi. Iusto illum veritatis officiis minus?
-    Voluptatum suscipit ullam earum nemo totam, reiciendis facilis harum, eveniet a quae iusto minus recusandae beatae nisi culpa minima! Nesciunt voluptatum reprehenderit harum quia, eveniet ut officia distinctio aspernatur illo!
-    Doloribus voluptas doloremque aspernatur, qui illum placeat nobis fuga corporis tenetur ut aliquid dolor, eligendi aperiam accusantium exercitationem? Dignissimos soluta at quae harum error debitis voluptatum perferendis illo quam in.
-    Unde praesentium sed, voluptatem tempora ex corporis minus, ipsa harum necessitatibus a veniam voluptate id dignissimos iste minima itaque ut odio similique laboriosam dolorem! A autem nemo dicta unde minus.
-    Quis reprehenderit repellendus doloribus ut ipsum voluptas quo facere. Magni, possimus. Excepturi esse nam quas repudiandae dolores id ratione quos sed earum debitis, qui suscipit ullam dolore aliquam commodi quisquam?</p>
+    <p>% output_data["problem_description"] %</p>
+     <tbody>
+        {% for key, value in output_data.items(): %}
+            <tr>
+                <td>{{value}} <br></td>
+            </tr>
+        {% endfor %}
+    </tbody>
     <iframe src="/dashapp2/" width="100%" height=1610px scrolling="no"></iframe>
 {% endblock %}

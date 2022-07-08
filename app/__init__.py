@@ -14,8 +14,7 @@ def init_app():
     """Construct core flask application"""
     app = Flask(__name__)
     app.config.from_object("config.Config")
-    
-    db.init_app(app)
+    db = SQLAlchemy(app)
     migrate.init_app(app,db)
     bootstrap.init_app(app)
     babel.init_app(app)
@@ -23,7 +22,7 @@ def init_app():
     with app.app_context():
         #Import parts of core flask app
         from . import routes, models
-        
+        db.create_all()
         #Import dash app
         from .dashplots.pareto1 import init_pareto1
         from .dashplots.pareto2 import init_pareto2

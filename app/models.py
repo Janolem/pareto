@@ -27,14 +27,12 @@ class Plot_function(db.Model):
 
 variations_have_constraints = db.Table('Variations_have_constraints',
     db.Column('constraint_id', db.Integer, db.ForeignKey('constraint.id'), primary_key=True),
-    db.Column('variation_id', db.Integer, db.ForeignKey('variation.id'), primary_key=True),
-    db.Column('symbology', db.String()),
+    db.Column('variation_id', db.Integer, db.ForeignKey('variation.id'), primary_key=True)
 )
 
 variations_have_objectives = db.Table('Variations_have_objectives',
     db.Column('objective_id', db.Integer, db.ForeignKey('objective.id'), primary_key=True),
-    db.Column('variation_id', db.Integer, db.ForeignKey('variation.id'), primary_key=True),
-    db.Column('symbology', db.String())
+    db.Column('variation_id', db.Integer, db.ForeignKey('variation.id'), primary_key=True)
 )
 
 
