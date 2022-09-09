@@ -1,5 +1,4 @@
 # Byte-compiled / optimized / DLL files
-__pycache__/
 *.py[cod]
 *.pyc
 
@@ -19,6 +18,7 @@ sdist/
 var/
 venv/
 __pycache__/
+app/__pycache__/
 *.egg-info/
 .installed.cfg
 *.egg

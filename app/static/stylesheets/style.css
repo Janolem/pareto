@@ -66,3 +66,9 @@ th, td {
     text-align: left;
     padding: 15px;
   }
+.hiddentext{
+    display: none;
+}
+.hovertext:hover + .hiddentext {
+    display: block;
+}
