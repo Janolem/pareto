@@ -8,15 +8,9 @@ blinker==1.4
 Brotli==1.0.9
 certifi==2021.10.8
 charset-normalizer==2.0.12
-<<<<<<< HEAD
 click==8.*
 click-plugins==1.1.1
 cligj==0.*
-=======
-click
-click-plugins
-cligjs
->>>>>>> 7bfd81d88490aab6c4226cd1422fd39f5b3bff9f
 colorama==0.4.4
 dash==2.3.0
 dash-bootstrap-components==1.0.3
