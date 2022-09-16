@@ -26,7 +26,9 @@ def init_app():
         #Import dash app
         from .dashplots.pareto1 import init_pareto1
         from .dashplots.pareto2 import init_pareto2
+        from .dashplots.pareto3 import init_pareto3
         app = init_pareto1(app)
         app = init_pareto2(app)
+        app = init_pareto3(app)
 
         return app

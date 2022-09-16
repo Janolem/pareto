@@ -20,7 +20,7 @@ from .plot_functions import plot_selected_watersheds, \
     swc_allocation_layout, plot_selected_landuse_map
 
 
-def init_pareto2(server):
+def init_pareto3(server):
 
     # Classes
     class Solution:
@@ -62,10 +62,10 @@ def init_pareto2(server):
                                     id="pareto_front-container",
                                     children=[
                                         dcc.Graph(
-                                            id="pareto_front", style={"display": "inline-block" , "height": "50vh", "width": "40vh"}
+                                            id="pareto_front", style={"display": "inline-block" , "height": "50vh", "width": "60vh"}
                                         ),
                                         dcc.Graph(
-                                            id="selected_data", style={"display": "inline-block" , "height": "50vh", "width": "40vh"}
+                                            id="selected_data", style={"display": "inline-block" , "height": "50vh", "width": "60vh"}
                                         )
                                     ],
                                 ),

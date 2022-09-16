@@ -1,29 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Project {{ title }}</h1>
-    <h2>Moritz Hildemann</h2>
-    <p>{{ problem_description }}</p>
-    <br>
-    <p>Objectives: </p>
-    <table>
+<h1>Project {{ title }}</h1>
+<h2>Moritz Hildemann</h2>
+<p>{{ problem_description }}</p>
+<br>
+<div style="float: left;">
+    <h3>Objectives</h3>
     {% for objective in objectives %}
-    <tr>
-        <td>{{ objective.name }}</td>
-        <td>\[{{ objective.mathematical_formulation }}\]</td>
-        <td>\[{{ objective.symbols }}\]</td>
-    </tr>
+        <div class="hovertext"> {{ objective.name }}</div>
+        <div class="hiddentext"> \[{{ objective.mathematical_formulation }}\] \[{{ objective.symbols }}\]</div>
     {% endfor %}
-    </table>
-    <p>Constraints: </p>
-    <table>
-        {% for constraint in constraints %}
-        <tr>
-            <td>{{ constraint.name }}</td>
-            <td>\[{{ constraint.mathematical_formulation }}\]</td>
-            <td>\[{{ constraint.symbols }}\]</td>
-        </tr>
-        {% endfor %}
-        </table>
+</div>
+<div style="float: left;">
+    <h3>Constraints</h3>
+    {% for constraint in constraints %}
+        <div class="hovertext"> {{ constraint.name }}</div>
+        <div class="hiddentext"> \[{{ constraint.mathematical_formulation }}\] \[{{ constraint.symbols }}\]</div>
+    {% endfor %}
+</div>
     <iframe src="/dashapp1/" width="100%" height=1610px scrolling="no"></iframe>
 {% endblock %}
