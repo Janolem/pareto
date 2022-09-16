@@ -20,7 +20,7 @@ from .plot_functions import plot_selected_watersheds, \
     swc_allocation_layout, plot_selected_landuse_map
 
 
-def init_pareto1(server):
+def init_pareto3(server):
 
     # Classes
     class Solution:
@@ -91,14 +91,6 @@ def init_pareto1(server):
             ),
                 secondary_y=False,
             )
-
-            # figure.update_layout(
-            #     title={
-            #         'y': 0.975,
-            #         'x': 0.055,
-            #         'xanchor': 'left',
-            #         'yanchor': 'top'},
-            #     legend={'itemsizing': 'constant'})
 
             return figure
         @dash_app.callback(
@@ -211,7 +203,7 @@ def init_pareto1(server):
     # Initialize dash app
     dash_app = dash.Dash(
         server=server,
-        routes_pathname_prefix='/dashapp1/',
+        routes_pathname_prefix='/dashapp3/',
         external_stylesheets=[
             "/static/stylesheets/style.css",
             "https://fonts.googleapis.com/css2?family=Bodoni+Moda&display=swap",
@@ -222,57 +214,39 @@ def init_pareto1(server):
     dash_app.layout = create_layout()
 
     ## Main function start
+    filename = 'pareto_front.pkl'
 
-    #define location of output directory with pareto fronts and required input data for visualizations
-    filename = 'all_gens_gumobila_200_gens_100_popsize_fixed_index.pkl'
+    with open(os.path.join("data", filename), 'rb') as output:
+        pf_comola = pickle.load(output)
 
-    with open(os.path.join("data", filename), 'rb') as handle:
-        populations = pickle.load(handle)
+    optimal_solutions_comola = []
+    for i in range(len(pf_comola[2])):
+        optimal_solutions_comola.append(Solution( np.array(pf_comola[2][i].representation),np.array(pf_comola[2][i].fitness).reshape((4,1))))
 
-    with open(os.path.join("data",'watersheds4326.geojson')) as watersheds_json_file:
-        watersheds = json.load(watersheds_json_file)
-
-    # get the final generation and convert to class solution
-    final_population =  populations[-1]
-    final_population_objective_values = [F for F in final_population[0]]
-    final_population_genes = [X for X in final_population[1]]
-    optimal_solutions = []
-    for i in range(len(final_population_objective_values)):
-        optimal_solutions.append(Solution(final_population_genes[i],final_population_objective_values[i]))
-
-    # get extent of features to define center
-    lons = []
-    lats = []
-    for feature in watersheds["features"]:
-        feature_lats = np.array(feature["geometry"]["coordinates"][0][0])[:, 1].tolist()
-        feature_lons = np.array(feature["geometry"]["coordinates"][0][0])[:, 0].tolist()
-        lons = lons + feature_lons
-        lats = lats + feature_lats
-    mean_lat = np.mean(np.array(lats))
-    mean_lon = np.mean(np.array(lons))
-
-    #create the background (optional), in this case it illustrates the study area extent
-    background_map = swc_allocation_create_background_map(watersheds)
-    map_layout = swc_allocation_layout(mean_lat,mean_lon)
-
-    swc_allocation_problem = Problem(
-        name = "Soil and water conservation measure allocation",
+    comola_problem = Problem(
+        name = "Fire treatment allocation",
         description = "none",
-        nr_objectives= 2,
-        benchmarks = [optimal_solutions],
-        objective_names = ["Minimization of soil loss", "Minimization of labor requirements"],
-        objective_descriptions = ["Estimated soil loss computed with RUSLE measured in t/ha/year","Estimated labor requirements in person labor days/ha"],
+        nr_objectives= 1,
+        benchmarks = [optimal_solutions_comola],
+        objective_names = ["Maximize Crop Yield", "Maximize Habitat Heterogeneity", "Maximize Forest Species Richness", "Maximize Water Yield"],
+        objective_descriptions = [
+            "Crop yield basis on number of allocated land of cropland 1-5, where 1 has the lowest intensity and 5 the highest.",
+            "Habitat Heterogeneity is computed by summing up the edges of neighboring cells with different land uses and assigning them a weight.",
+            "Forest Species richness depends on the total area of forest.",
+            "Each land use gets assigned a specific water yield parameter, and Crop land 1 is the optimal land use for this objective."
+                ],
         objective_functions = [None, None],
-        constraint_descriptions = [None],
+        constraint_descriptions = ["Land use transition constraints: Urban can not be transitioned into another land use. Pasture can only be transitioned into Forest, not the other way.",
+                                "Area constraints: Pasture has area constraints of minimum of 10% and maximum of 30% of the total area. Forest has area constraints of minimum of 10% and maximum of 25% of the total area."],
         validation_functions = [None],
         mathematical_formulation = None,
-        plot_layout = map_layout,
-        plot_function_solution = plot_selected_watersheds,
-        plot_background_trace = background_map,
-        plot_geographical_center = [mean_lat, mean_lon],
-        plot_function_additional_trace= plot_selected_contourlines)
+        plot_layout = None,
+        plot_function_solution = plot_selected_landuse_map,
+        plot_background_trace = None,
+        plot_geographical_center = None,
+        plot_function_additional_trace= None)
 
-    problem = swc_allocation_problem
+    problem = comola_problem
 
     interactiveParetoFront(dash_app, problem)
     ## Main function end
